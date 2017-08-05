@@ -1,0 +1,2 @@
+# KodaiBot
+Bot for Discord
