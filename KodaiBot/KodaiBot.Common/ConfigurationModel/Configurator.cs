@@ -17,11 +17,20 @@ namespace KodaiBot.Common.ConfigurationModel
             public static string Url
                 => GetAppSettingValue(Constants.Bot.Url);
 
-            public static string Prefix
-                => GetAppSettingValue(Constants.Bot.Prefix);
-
             public static string Token
                 => GetAppSettingValue(Constants.Bot.Token);
+
+            public static char Prefix
+            {
+                get
+                {
+                    if (!(char.TryParse(GetAppSettingValue(Constants.Bot.Prefix), out char prefixCharacter)))
+                    {
+                        throw new Exception("Can't parse prefix to singular character");
+                    }
+                    return prefixCharacter;
+                }
+            }
         }
 
         public class Database
