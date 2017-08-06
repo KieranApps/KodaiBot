@@ -24,7 +24,7 @@ namespace KodaiBot.Common.ConfigurationModel
             {
                 get
                 {
-                    if (!(char.TryParse(GetAppSettingValue(Constants.Bot.Prefix), out char prefixCharacter)))
+                    if (!char.TryParse(GetAppSettingValue(Constants.Bot.Prefix), out char prefixCharacter))
                     {
                         throw new Exception("Can't parse prefix to singular character");
                     }
