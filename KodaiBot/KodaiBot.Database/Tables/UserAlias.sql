@@ -1,0 +1,9 @@
+﻿CREATE TABLE [KodaiBot].[UserAlias]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [UserId] UNIQUEIDENTIFIER NOT NULL, 
+    [AliasId] UNIQUEIDENTIFIER NOT NULL,
+
+	CONSTRAINT [FK_UserAlias_User] FOREIGN KEY ([UserId]) REFERENCES [KodaiBot].[User]([Id]),
+	CONSTRAINT [FK_UserAlias_Alias] FOREIGN KEY ([AliasId]) REFERENCES [KodaiBot].[Alias]([Id])
+)

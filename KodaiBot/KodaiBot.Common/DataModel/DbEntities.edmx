@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KodaiBot.DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Birth" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Guild">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Birth" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GuildAlias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GuildId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AliasId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GuildUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GuildId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GuildUserSnapshot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GuildUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SnapshotId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Snapshot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateTimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Birth" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAlias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AliasId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_GuildAlias_Alias">
+          <End Role="Alias" Type="Self.Alias" Multiplicity="1" />
+          <End Role="GuildAlias" Type="Self.GuildAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildAlias">
+              <PropertyRef Name="AliasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildAlias_Guild">
+          <End Role="Guild" Type="Self.Guild" Multiplicity="1" />
+          <End Role="GuildAlias" Type="Self.GuildAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guild">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildAlias">
+              <PropertyRef Name="GuildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildUser_Guild">
+          <End Role="Guild" Type="Self.Guild" Multiplicity="1" />
+          <End Role="GuildUser" Type="Self.GuildUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guild">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildUser">
+              <PropertyRef Name="GuildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GuildUser" Type="Self.GuildUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildUserSnapshot_GuildUser">
+          <End Role="GuildUser" Type="Self.GuildUser" Multiplicity="1" />
+          <End Role="GuildUserSnapshot" Type="Self.GuildUserSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuildUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildUserSnapshot">
+              <PropertyRef Name="GuildUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildUserSnapshot_Snapshot">
+          <End Role="Snapshot" Type="Self.Snapshot" Multiplicity="1" />
+          <End Role="GuildUserSnapshot" Type="Self.GuildUserSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Snapshot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildUserSnapshot">
+              <PropertyRef Name="SnapshotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAlias_Alias">
+          <End Role="Alias" Type="Self.Alias" Multiplicity="1" />
+          <End Role="UserAlias" Type="Self.UserAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAlias">
+              <PropertyRef Name="AliasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAlias_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserAlias" Type="Self.UserAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAlias">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KodaiBotDataModelStoreContainer">
+          <EntitySet Name="Alias" EntityType="Self.Alias" Schema="KodaiBot" store:Type="Tables" />
+          <EntitySet Name="Guild" EntityType="Self.Guild" Schema="KodaiBot" store:Type="Tables" />
+          <EntitySet Name="GuildAlias" EntityType="Self.GuildAlias" Schema="KodaiBot" store:Type="Tables" />
+          <EntitySet Name="GuildUser" EntityType="Self.GuildUser" Schema="KodaiBot" store:Type="Tables" />
+          <EntitySet Name="GuildUserSnapshot" EntityType="Self.GuildUserSnapshot" Schema="KodaiBot" store:Type="Tables" />
+          <EntitySet Name="Snapshot" EntityType="Self.Snapshot" Schema="KodaiBot" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="KodaiBot" store:Type="Tables" />
+          <EntitySet Name="UserAlias" EntityType="Self.UserAlias" Schema="KodaiBot" store:Type="Tables" />
+          <AssociationSet Name="FK_GuildAlias_Alias" Association="Self.FK_GuildAlias_Alias">
+            <End Role="Alias" EntitySet="Alias" />
+            <End Role="GuildAlias" EntitySet="GuildAlias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildAlias_Guild" Association="Self.FK_GuildAlias_Guild">
+            <End Role="Guild" EntitySet="Guild" />
+            <End Role="GuildAlias" EntitySet="GuildAlias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildUser_Guild" Association="Self.FK_GuildUser_Guild">
+            <End Role="Guild" EntitySet="Guild" />
+            <End Role="GuildUser" EntitySet="GuildUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildUser_User" Association="Self.FK_GuildUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="GuildUser" EntitySet="GuildUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildUserSnapshot_GuildUser" Association="Self.FK_GuildUserSnapshot_GuildUser">
+            <End Role="GuildUser" EntitySet="GuildUser" />
+            <End Role="GuildUserSnapshot" EntitySet="GuildUserSnapshot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildUserSnapshot_Snapshot" Association="Self.FK_GuildUserSnapshot_Snapshot">
+            <End Role="Snapshot" EntitySet="Snapshot" />
+            <End Role="GuildUserSnapshot" EntitySet="GuildUserSnapshot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAlias_Alias" Association="Self.FK_UserAlias_Alias">
+            <End Role="Alias" EntitySet="Alias" />
+            <End Role="UserAlias" EntitySet="UserAlias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAlias_User" Association="Self.FK_UserAlias_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserAlias" EntitySet="UserAlias" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KodaiBot.DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birth" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GuildAlias" Relationship="Self.FK_GuildAlias_Alias" FromRole="Alias" ToRole="GuildAlias" />
+          <NavigationProperty Name="UserAlias" Relationship="Self.FK_UserAlias_Alias" FromRole="Alias" ToRole="UserAlias" />
+        </EntityType>
+        <EntityType Name="Guild">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Birth" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GuildAlias" Relationship="Self.FK_GuildAlias_Guild" FromRole="Guild" ToRole="GuildAlias" />
+          <NavigationProperty Name="GuildUser" Relationship="Self.FK_GuildUser_Guild" FromRole="Guild" ToRole="GuildUser" />
+        </EntityType>
+        <EntityType Name="GuildAlias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="GuildId" Type="Guid" Nullable="false" />
+          <Property Name="AliasId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Alias" Relationship="Self.FK_GuildAlias_Alias" FromRole="GuildAlias" ToRole="Alias" />
+          <NavigationProperty Name="Guild" Relationship="Self.FK_GuildAlias_Guild" FromRole="GuildAlias" ToRole="Guild" />
+        </EntityType>
+        <EntityType Name="GuildUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="GuildId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Guild" Relationship="Self.FK_GuildUser_Guild" FromRole="GuildUser" ToRole="Guild" />
+          <NavigationProperty Name="User" Relationship="Self.FK_GuildUser_User" FromRole="GuildUser" ToRole="User" />
+          <NavigationProperty Name="GuildUserSnapshot" Relationship="Self.FK_GuildUserSnapshot_GuildUser" FromRole="GuildUser" ToRole="GuildUserSnapshot" />
+        </EntityType>
+        <EntityType Name="GuildUserSnapshot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="GuildUserId" Type="Guid" Nullable="false" />
+          <Property Name="SnapshotId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="GuildUser" Relationship="Self.FK_GuildUserSnapshot_GuildUser" FromRole="GuildUserSnapshot" ToRole="GuildUser" />
+          <NavigationProperty Name="Snapshot" Relationship="Self.FK_GuildUserSnapshot_Snapshot" FromRole="GuildUserSnapshot" ToRole="Snapshot" />
+        </EntityType>
+        <EntityType Name="Snapshot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="DateTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GuildUserSnapshot" Relationship="Self.FK_GuildUserSnapshot_Snapshot" FromRole="Snapshot" ToRole="GuildUserSnapshot" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Birth" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GuildUser" Relationship="Self.FK_GuildUser_User" FromRole="User" ToRole="GuildUser" />
+          <NavigationProperty Name="UserAlias" Relationship="Self.FK_UserAlias_User" FromRole="User" ToRole="UserAlias" />
+        </EntityType>
+        <EntityType Name="UserAlias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="AliasId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Alias" Relationship="Self.FK_UserAlias_Alias" FromRole="UserAlias" ToRole="Alias" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserAlias_User" FromRole="UserAlias" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_GuildAlias_Alias">
+          <End Role="Alias" Type="Self.Alias" Multiplicity="1" />
+          <End Role="GuildAlias" Type="Self.GuildAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildAlias">
+              <PropertyRef Name="AliasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAlias_Alias">
+          <End Role="Alias" Type="Self.Alias" Multiplicity="1" />
+          <End Role="UserAlias" Type="Self.UserAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAlias">
+              <PropertyRef Name="AliasId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildAlias_Guild">
+          <End Role="Guild" Type="Self.Guild" Multiplicity="1" />
+          <End Role="GuildAlias" Type="Self.GuildAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guild">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildAlias">
+              <PropertyRef Name="GuildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildUser_Guild">
+          <End Role="Guild" Type="Self.Guild" Multiplicity="1" />
+          <End Role="GuildUser" Type="Self.GuildUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guild">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildUser">
+              <PropertyRef Name="GuildId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GuildUser" Type="Self.GuildUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildUserSnapshot_GuildUser">
+          <End Role="GuildUser" Type="Self.GuildUser" Multiplicity="1" />
+          <End Role="GuildUserSnapshot" Type="Self.GuildUserSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuildUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildUserSnapshot">
+              <PropertyRef Name="GuildUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuildUserSnapshot_Snapshot">
+          <End Role="Snapshot" Type="Self.Snapshot" Multiplicity="1" />
+          <End Role="GuildUserSnapshot" Type="Self.GuildUserSnapshot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Snapshot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuildUserSnapshot">
+              <PropertyRef Name="SnapshotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAlias_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserAlias" Type="Self.UserAlias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAlias">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alias" EntityType="Self.Alias" />
+          <EntitySet Name="Guild" EntityType="Self.Guild" />
+          <EntitySet Name="GuildAlias" EntityType="Self.GuildAlias" />
+          <EntitySet Name="GuildUser" EntityType="Self.GuildUser" />
+          <EntitySet Name="GuildUserSnapshot" EntityType="Self.GuildUserSnapshot" />
+          <EntitySet Name="Snapshot" EntityType="Self.Snapshot" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserAlias" EntityType="Self.UserAlias" />
+          <AssociationSet Name="FK_GuildAlias_Alias" Association="Self.FK_GuildAlias_Alias">
+            <End Role="Alias" EntitySet="Alias" />
+            <End Role="GuildAlias" EntitySet="GuildAlias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAlias_Alias" Association="Self.FK_UserAlias_Alias">
+            <End Role="Alias" EntitySet="Alias" />
+            <End Role="UserAlias" EntitySet="UserAlias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildAlias_Guild" Association="Self.FK_GuildAlias_Guild">
+            <End Role="Guild" EntitySet="Guild" />
+            <End Role="GuildAlias" EntitySet="GuildAlias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildUser_Guild" Association="Self.FK_GuildUser_Guild">
+            <End Role="Guild" EntitySet="Guild" />
+            <End Role="GuildUser" EntitySet="GuildUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildUser_User" Association="Self.FK_GuildUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="GuildUser" EntitySet="GuildUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildUserSnapshot_GuildUser" Association="Self.FK_GuildUserSnapshot_GuildUser">
+            <End Role="GuildUser" EntitySet="GuildUser" />
+            <End Role="GuildUserSnapshot" EntitySet="GuildUserSnapshot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuildUserSnapshot_Snapshot" Association="Self.FK_GuildUserSnapshot_Snapshot">
+            <End Role="Snapshot" EntitySet="Snapshot" />
+            <End Role="GuildUserSnapshot" EntitySet="GuildUserSnapshot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAlias_User" Association="Self.FK_UserAlias_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserAlias" EntitySet="UserAlias" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KodaiBotDataModelStoreContainer" CdmEntityContainer="DbEntities">
+          <EntitySetMapping Name="Alias">
+            <EntityTypeMapping TypeName="KodaiBot.DataModel.Alias">
+              <MappingFragment StoreEntitySet="Alias">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guild">
+            <EntityTypeMapping TypeName="KodaiBot.DataModel.Guild">
+              <MappingFragment StoreEntitySet="Guild">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuildAlias">
+            <EntityTypeMapping TypeName="KodaiBot.DataModel.GuildAlias">
+              <MappingFragment StoreEntitySet="GuildAlias">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuildId" ColumnName="GuildId" />
+                <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuildUser">
+            <EntityTypeMapping TypeName="KodaiBot.DataModel.GuildUser">
+              <MappingFragment StoreEntitySet="GuildUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuildId" ColumnName="GuildId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuildUserSnapshot">
+            <EntityTypeMapping TypeName="KodaiBot.DataModel.GuildUserSnapshot">
+              <MappingFragment StoreEntitySet="GuildUserSnapshot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuildUserId" ColumnName="GuildUserId" />
+                <ScalarProperty Name="SnapshotId" ColumnName="SnapshotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Snapshot">
+            <EntityTypeMapping TypeName="KodaiBot.DataModel.Snapshot">
+              <MappingFragment StoreEntitySet="Snapshot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="KodaiBot.DataModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAlias">
+            <EntityTypeMapping TypeName="KodaiBot.DataModel.UserAlias">
+              <MappingFragment StoreEntitySet="UserAlias">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AliasId" ColumnName="AliasId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

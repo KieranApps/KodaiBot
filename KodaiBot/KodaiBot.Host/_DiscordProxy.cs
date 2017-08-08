@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using KodaiBot.Common.ConfigurationModel;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace KodaiBot.Host
 {

@@ -1,0 +1,5 @@
+﻿CREATE TABLE [KodaiBot].[Guild]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Birth] DATETIME NOT NULL
+)

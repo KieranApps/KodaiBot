@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc49bb6e96044818bb6aa16ec9a96e7d" Name="Diagram1">
+        <EntityTypeShape EntityType="KodaiBot.DataModel.Alias" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KodaiBot.DataModel.Guild" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="KodaiBot.DataModel.GuildAlias" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KodaiBot.DataModel.GuildUser" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KodaiBot.DataModel.GuildUserSnapshot" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KodaiBot.DataModel.Snapshot" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KodaiBot.DataModel.User" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KodaiBot.DataModel.UserAlias" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="KodaiBot.DataModel.FK_GuildAlias_Alias" ManuallyRouted="false" />
+        <AssociationConnector Association="KodaiBot.DataModel.FK_UserAlias_Alias" ManuallyRouted="false" />
+        <AssociationConnector Association="KodaiBot.DataModel.FK_GuildAlias_Guild" ManuallyRouted="false" />
+        <AssociationConnector Association="KodaiBot.DataModel.FK_GuildUser_Guild" ManuallyRouted="false" />
+        <AssociationConnector Association="KodaiBot.DataModel.FK_GuildUser_User" ManuallyRouted="false" />
+        <AssociationConnector Association="KodaiBot.DataModel.FK_GuildUserSnapshot_GuildUser" ManuallyRouted="false" />
+        <AssociationConnector Association="KodaiBot.DataModel.FK_GuildUserSnapshot_Snapshot" ManuallyRouted="false" />
+        <AssociationConnector Association="KodaiBot.DataModel.FK_UserAlias_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

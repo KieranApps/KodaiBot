@@ -1,0 +1,9 @@
+﻿CREATE TABLE [KodaiBot].[GuildUser]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [GuildId] UNIQUEIDENTIFIER NOT NULL, 
+    [UserId] UNIQUEIDENTIFIER NOT NULL,
+
+	CONSTRAINT [FK_GuildUser_User] FOREIGN KEY ([UserId]) REFERENCES [KodaiBot].[User]([Id]),
+	CONSTRAINT [FK_GuildUser_Guild] FOREIGN KEY ([GuildId]) REFERENCES [KodaiBot].[Guild]([Id])
+)

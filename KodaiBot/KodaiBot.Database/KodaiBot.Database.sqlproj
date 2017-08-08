@@ -7,7 +7,7 @@
     <Name>KodaiBot.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{ace1684a-584f-4dc9-a2cf-5be8e97314a3}</ProjectGuid>
+    <ProjectGuid>{88e3b6a8-e012-466e-99ac-943ddc1111ee}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -17,12 +17,16 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultSchema>KodaiBot</DefaultSchema>
+    <TargetFrameworkProfile />
+    <GenerateCreateScript>True</GenerateCreateScript>
+    <DacVersion>1.0.0.0</DacVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -57,5 +61,30 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Create" />
+    <Folder Include="Scripts\Update" />
+    <Folder Include="Tables" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\_DbVersion.sql" />
+    <Build Include="Tables\Snapshot.sql" />
+    <Build Include="Tables\Alias.sql" />
+    <Build Include="Tables\Guild.sql" />
+    <Build Include="Tables\GuildAlias.sql" />
+    <Build Include="Tables\User.sql" />
+    <Build Include="Tables\UserAlias.sql" />
+    <Build Include="Tables\GuildUser.sql" />
+    <Build Include="Scripts\Create\KodaiBot.sql" />
+    <Build Include="Tables\GuildUserSnapshot.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="KodaiBot.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Create\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Update\v0.0 to v1.0.Database versioning.sql" />
   </ItemGroup>
 </Project>

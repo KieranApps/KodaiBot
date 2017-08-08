@@ -1,0 +1,5 @@
+﻿CREATE TABLE [KodaiBot].[Snapshot]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [DateTimeStamp] DATETIME NOT NULL
+)

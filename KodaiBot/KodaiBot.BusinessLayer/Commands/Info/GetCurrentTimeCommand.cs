@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using KodaiBot.Common.ConfigurationModel;
 using KodaiBot.RepositoryLayer.Interfaces;
@@ -28,7 +24,8 @@ namespace KodaiBot.BusinessLayer.Commands
 
         internal override void OnExecute()
         {
-            Result = DateTime.UtcNow.AddHours(_determinedTimeZone).ToLongDateString();
+            var date = DateTime.UtcNow.AddHours(_determinedTimeZone);
+            Result = $"{date.ToLongDateString()} {date.ToLongTimeString()}";
         }
     }
 }

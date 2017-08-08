@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KodaiBot.Common.DataModel;
 using KodaiBot.RepositoryLayer.Interfaces;
 
 namespace KodaiBot.RepositoryLayer
@@ -14,6 +10,7 @@ namespace KodaiBot.RepositoryLayer
         public UnitOfWork(DbEntities context)
         {
             _context = context;
+            _context.Configuration.LazyLoadingEnabled = false;
         }
 
         public void BeginTransaction()
