@@ -27,5 +27,20 @@ namespace KodaiBot.Host.Controllers
 
             await ReplyAsync(command.Result);
         }
+
+        [Command("roll"),
+         Summary("Rolls the dice")]
+        public async Task Roll(
+            [Remainder,
+             Summary("A maximum number for the dice to throw")] string number
+        )
+        {
+            var command = GetCommand<GetDicerollCommand>();
+            command.MaxEyes = number;
+
+            command.Execute();
+
+            await ReplyAsync(command.Result);
+        }
     }
 }

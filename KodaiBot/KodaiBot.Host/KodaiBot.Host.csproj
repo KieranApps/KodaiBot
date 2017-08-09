@@ -137,7 +137,7 @@
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
     <Compile Include="_DiscordProxy.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="_Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

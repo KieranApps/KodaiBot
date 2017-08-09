@@ -1,10 +1,10 @@
 ﻿using System;
 using AutoMapper;
 using Discord;
-using KodaiBot.RepositoryLayer.Interfaces;
 using KodaiBot.Common.ConfigurationModel;
+using KodaiBot.RepositoryLayer.Interfaces;
 
-namespace KodaiBot.BusinessLayer
+namespace KodaiBot.BusinessLayer.Commands
 {
     public class CommandBase 
     {

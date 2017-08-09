@@ -5,6 +5,7 @@ using KodaiBot.RepositoryLayer;
 using Microsoft.Extensions.DependencyInjection;
 using KodaiBot.RepositoryLayer.Interfaces;
 using KodaiBot.BusinessLayer.Commands;
+using KodaiBot.BusinessLayer.Helpers;
 using KodaiBot.Common.DataModel;
 using KodaiBot.RepositoryLayer.Repositories;
 
@@ -29,10 +30,10 @@ namespace KodaiBot.Host
             services.AddSingleton(
                 new MapperConfiguration(cfg =>
                 {
-                    cfg.AddProfile(new DataToIntermediate());
-                    cfg.AddProfile(new IntermediateToData());
-                    cfg.AddProfile(new IntermediateToDomain());
-                    cfg.AddProfile(new DomainToIntermediate());
+                    cfg.AddProfile<DataToIntermediate>();
+                    cfg.AddProfile<IntermediateToData>();
+                    cfg.AddProfile<IntermediateToDomain>();
+                    cfg.AddProfile<DomainToIntermediate>();
                 }).CreateMapper());
 
             // Discord services
@@ -41,8 +42,8 @@ namespace KodaiBot.Host
             services.AddTransient<CommandService>();
 
             // Repositories
-            services.AddTransient<DbEntities>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<DbEntities>();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IAliasRepository, AliasRepository>();
             services.AddTransient<IGuildRepository, GuildRepository>();
             services.AddTransient<ISnapshotRepository, SnapshotRepository>();
@@ -50,8 +51,10 @@ namespace KodaiBot.Host
 
             // Commands
             services.AddTransient<GetCurrentTimeCommand>();
+            services.AddTransient<GetDicerollCommand>();
 
-
+            // Helpers
+            services.AddTransient<AliasHelper>();
         }
     }
 }

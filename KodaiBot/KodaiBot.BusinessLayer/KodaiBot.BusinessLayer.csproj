@@ -161,8 +161,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandBase.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\Info\GetDicerollCommand.cs" />
     <Compile Include="Commands\Info\GetCurrentTimeCommand.cs" />
+    <Compile Include="Helpers\AliasHelper.cs" />
+    <Compile Include="Helpers\HelperBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
