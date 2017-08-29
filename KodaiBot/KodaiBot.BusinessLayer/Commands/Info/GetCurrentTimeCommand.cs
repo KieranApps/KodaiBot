@@ -16,10 +16,10 @@ namespace KodaiBot.BusinessLayer.Commands
         {
         }
 
-        internal override bool CanExecute()
+        internal override void CanExecute()
         {
-            return CheckPrerequisite(TimeZoneString.Equals(string.Empty) 
-                || int.TryParse(TimeZoneString, out _determinedTimeZone), "Timezone couldn't be parsed into a number");
+            CheckPrerequisite(TimeZoneString.Equals(string.Empty) 
+                || int.TryParse(TimeZoneString, out _determinedTimeZone), "Parameter couldn't be parsed into a number");
         }
 
         internal override void OnExecute()

@@ -52,6 +52,7 @@ namespace KodaiBot.Host
             // Commands
             services.AddTransient<GetCurrentTimeCommand>();
             services.AddTransient<GetDicerollCommand>();
+            services.AddTransient<GetCalculationResultCommand>();
 
             // Helpers
             services.AddTransient<AliasHelper>();

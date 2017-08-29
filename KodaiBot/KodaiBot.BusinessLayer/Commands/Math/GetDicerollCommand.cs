@@ -16,10 +16,10 @@ namespace KodaiBot.BusinessLayer.Commands
         {
         }
 
-        internal override bool CanExecute()
+        internal override void CanExecute()
         {
-            return CheckPrerequisite(MaxEyes.Equals(string.Empty) 
-                || int.TryParse(MaxEyes, out _maxEyes), "Timezone couldn't be parsed into a number");
+            CheckPrerequisite(MaxEyes.Equals(string.Empty) 
+                || int.TryParse(MaxEyes, out _maxEyes), "Parameter couldn't be parsed into a number");
         }
 
         internal override void OnExecute()

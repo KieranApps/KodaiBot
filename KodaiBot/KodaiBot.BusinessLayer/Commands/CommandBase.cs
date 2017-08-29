@@ -6,7 +6,7 @@ using KodaiBot.RepositoryLayer.Interfaces;
 
 namespace KodaiBot.BusinessLayer.Commands
 {
-    public class CommandBase 
+    public class CommandBase
     {
         internal Logger Logger;
         internal IUnitOfWork UnitOfWork;
@@ -21,38 +21,34 @@ namespace KodaiBot.BusinessLayer.Commands
 
         public void Execute()
         {
-            if (!CanExecute())
-            {
-                Logger.Log($"Command {this.GetType().Name } does not meet the requirements to be Executed", this.GetType().Name, LogSeverity.Warning);
-                return;
-            }
-
-            UnitOfWork.BeginTransaction();
-            Logger.Log($"Command { this.GetType().Name } is ready to be Executed", this.GetType().Name);
             try
             {
+                UnitOfWork.BeginTransaction();
+                CanExecute();
+
+                Logger.Log($"Command { this.GetType().Name } is ready to be Executed", this.GetType().Name);
+
                 OnExecute();
                 UnitOfWork.Commit();
                 Logger.Log($"Command { this.GetType().Name } has succesfully been executed", this.GetType().Name);
             }
             catch (Exception exception)
             {
-                UnitOfWork.RollBack();
                 Logger.Log(exception.Message, this.GetType().Name, LogSeverity.Critical, exception);
+                UnitOfWork.RollBack();
+                throw;
             }
         }
 
-        internal virtual bool CanExecute()
+        internal virtual void CanExecute()
         {
-            return true;
         }
 
         internal virtual void OnExecute()
         {
-
         }
 
-        internal bool CheckPrerequisite(bool prerequisite, string refusalMessage = "")
+        internal void CheckPrerequisite(bool prerequisite, string refusalMessage = "")
         {
             if (prerequisite)
             {
@@ -60,10 +56,8 @@ namespace KodaiBot.BusinessLayer.Commands
             }
             else
             {
-                Logger.Log(refusalMessage, this.GetType().Name, LogSeverity.Warning);
+                throw new Exception(refusalMessage);
             }
-
-            return prerequisite;
         }
 
     }
