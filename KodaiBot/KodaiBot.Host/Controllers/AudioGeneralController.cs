@@ -29,21 +29,21 @@ namespace KodaiBot.Host.Controllers
             return command.Result;
         }
 
-        [Command("summon"),
+        [Command("summon", RunMode = RunMode.Async),
+
             Summary("Joins your channel")]
         public async Task Summon(IVoiceChannel channel = null)
         {
             var client = await GetAudioClient(channel);
-            await Logger.Log($"Latency: {client.Latency}", "Here");
         }
 
 
-        [Command("test")]
+        [Command("test", RunMode = RunMode.Async)]
         public async Task Test(IVoiceChannel channel = null)
         {
             using (var client = await GetAudioClient(channel))
             {
-                await Logger.Log($"Latency: {client.Latency}", "Here");
+
             }
         }
     }
