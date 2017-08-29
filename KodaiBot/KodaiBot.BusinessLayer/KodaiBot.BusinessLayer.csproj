@@ -164,6 +164,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Audio\SummonAudioClient.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\Math\GetCalculationResultCommand.cs" />
     <Compile Include="Commands\Math\GetDicerollCommand.cs" />
@@ -175,9 +176,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KodaiBot.Common\KodaiBot.Common.csproj">

@@ -13,6 +13,7 @@ namespace KodaiBot.Host.Controllers
         }
 
         [Command("time"), 
+            Alias("now", "timezone", "date", "datetime"),
             Summary("Returns the time in a current timezone")]
         public async Task GetCurrentTime(
             [Summary("The timezone you want to return")] string timezone = ""

@@ -53,6 +53,7 @@ namespace KodaiBot.Host
             services.AddTransient<GetCurrentTimeCommand>();
             services.AddTransient<GetDicerollCommand>();
             services.AddTransient<GetCalculationResultCommand>();
+            services.AddTransient<SummonAudioClient>();
 
             // Helpers
             services.AddTransient<AliasHelper>();

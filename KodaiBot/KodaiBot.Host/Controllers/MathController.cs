@@ -16,7 +16,8 @@ namespace KodaiBot.Host.Controllers
         }
 
         [Command("roll"),
-         Summary("Rolls the dice")]
+            Alias("dice", "diceroll", "rng", "random"),
+            Summary("Rolls the dice")]
         public async Task RollTheDice(
             [Summary("A maximum number for the dice to throw")] string number = ""
             )
@@ -30,6 +31,7 @@ namespace KodaiBot.Host.Controllers
         }
 
         [Command("solve"),
+            Alias("calc", "cal", "calculate", "compute"),
             Summary("Evaluates a mathmetical expression")]
         public async Task Calculate(
             [Summary("Mathmetical expression to solve"),
