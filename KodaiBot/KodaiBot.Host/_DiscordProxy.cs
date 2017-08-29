@@ -24,6 +24,7 @@ namespace KodaiBot.Host
             _client = new DiscordSocketClient(
                 new DiscordSocketConfig
                 {
+                    
                     LogLevel = LogSeverity.Info
                 });        
 

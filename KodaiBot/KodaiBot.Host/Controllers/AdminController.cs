@@ -20,9 +20,6 @@ namespace KodaiBot.Host.Controllers
             public CleanController(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
             {
             }
-
-
-
         }
     }
 }
