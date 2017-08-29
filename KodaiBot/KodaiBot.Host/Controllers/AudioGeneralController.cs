@@ -33,18 +33,18 @@ namespace KodaiBot.Host.Controllers
             Summary("Joins your channel")]
         public async Task Summon(IVoiceChannel channel = null)
         {
-            using (var client = await GetAudioClient(channel))
-            {
-                await Logger.Log($"Latency: {client.Latency}", "Here");
-            }
+            var client = await GetAudioClient(channel);
+            await Logger.Log($"Latency: {client.Latency}", "Here");
         }
 
 
         [Command("test")]
         public async Task Test(IVoiceChannel channel = null)
         {
-            var client = GetAudioClient(channel);
-            
+            using (var client = await GetAudioClient(channel))
+            {
+                await Logger.Log($"Latency: {client.Latency}", "Here");
+            }
         }
     }
 }
