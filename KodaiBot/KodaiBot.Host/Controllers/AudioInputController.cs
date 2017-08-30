@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Discord;
-using Discord.Audio;
 using Discord.Commands;
-using KodaiBot.BusinessLayer.Commands;
 using KodaiBot.Common.ConfigurationModel;
 
 namespace KodaiBot.Host.Controllers
@@ -24,13 +17,8 @@ namespace KodaiBot.Host.Controllers
             Summary("Joins your channel")]
         public async Task Summon()
         {
-            var command = GetCommand<SummonAudioClient>();
-            command.User = Context.User;
-
-            command.Execute();
-
-            using (var client = await command.Result)
-            {
+            using (var client = await GetAudioClient())
+            { 
                 await Task.Delay(-1);
             }
         }

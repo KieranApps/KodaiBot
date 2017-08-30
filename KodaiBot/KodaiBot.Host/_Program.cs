@@ -54,6 +54,7 @@ namespace KodaiBot.Host
             services.AddTransient<GetDicerollCommand>();
             services.AddTransient<GetCalculationResultCommand>();
             services.AddTransient<SummonAudioClient>();
+            services.AddTransient<GetAudioStreamCommand>();
 
             // Helpers
             services.AddTransient<AliasHelper>();

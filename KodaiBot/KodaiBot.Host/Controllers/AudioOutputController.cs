@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+using System.IO;
 using System.Threading.Tasks;
-using Discord;
+using Discord.Audio;
 using Discord.Commands;
 using KodaiBot.BusinessLayer.Commands;
 using KodaiBot.Common.ConfigurationModel;
@@ -35,14 +32,13 @@ namespace KodaiBot.Host.Controllers
             public async Task PlayRelativePath(
                 [Summary("Relative path to the file on the server")] string path)
             {
-                var command = GetCommand<SummonAudioClient>();
-                command.User = Context.User;
-
-                command.Execute();
-
-                using (var client = await command.Result)
+                using (var client = await GetAudioClient())
                 {
-                    await Task.Delay(5000);
+                    var stream = GetOutputAudioStream();
+                    var outgoingStream = client.CreatePCMStream(AudioApplication.Mixed);
+
+                    await stream.CopyToAsync(outgoingStream);
+                    await outgoingStream.FlushAsync();
                 }
             }
 
@@ -50,18 +46,20 @@ namespace KodaiBot.Host.Controllers
             public async Task PlayYoutube(
                 [Summary("Url to the youtube video")] string url)
             {
-                var command = GetCommand<SummonAudioClient>();
-                command.User = Context.User;
-
-                command.Execute();
-
-                using (var client = await command.Result)
+                using (var client = await GetAudioClient())
                 {
                     await Task.Delay(5000);
                 }
             }
-        }
 
-        
+            private Stream GetOutputAudioStream()
+            {
+                var command = GetCommand<GetAudioStreamCommand>();
+
+                command.Execute();
+
+                return command.Result;
+            }
+        }
     }
 }
