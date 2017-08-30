@@ -25,7 +25,7 @@ namespace KodaiBot.Host.Controllers
             public async Task FindAudioSource(
                 [Summary("Try to dynamically find out what the source is and await that command.")] string path)
             {
-                
+                await Task.Delay(-1);
             }
 
             [Command("mp3", RunMode = RunMode.Async)]

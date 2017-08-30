@@ -20,7 +20,7 @@ namespace KodaiBot.BusinessLayer.Commands
             var ffmpeg = new ProcessStartInfo
             {
                 FileName = "ffmpeg",
-                Arguments = "-i ./ -ac 2 -f s16le -ar 48000 pipe:1",
+                Arguments = "-i ffmpeg.exe -ac 2 -f s16le -ar 48000 pipe:1",
                 UseShellExecute = false,
                 RedirectStandardOutput = true
             };
