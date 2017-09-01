@@ -33,6 +33,8 @@ namespace KodaiBot.BusinessLayer.Helpers
             }
 
             var audioClient = await channel.ConnectAsync();
+            audioClient.StreamCreated += OnStreamCreated;
+            audioClient.StreamDestroyed += OnStreamDestroyed;
 
             if (_connectedChannels.TryAdd(guild.Id, audioClient))
             {
@@ -48,7 +50,7 @@ namespace KodaiBot.BusinessLayer.Helpers
             await Logger.Log($"Disconnected from voice on {guild.Name}.", GetType().Name);
         }
 
-        public async Task SendAsync(IGuild guild, string path, IVoiceChannel channel = null)
+        public async Task SendAsync(IGuild guild, string path)
         {
             if (!File.Exists(path)) throw new FileNotFoundException("File does not exist.");
 
@@ -72,6 +74,16 @@ namespace KodaiBot.BusinessLayer.Helpers
                 UseShellExecute = false,
                 RedirectStandardOutput = true
             });
+        }
+
+        private async Task OnStreamCreated(ulong id, AudioInStream stream)
+        {
+            //ToDo: KB-006 Need to add incoming voice processing.
+        }
+
+        private async Task OnStreamDestroyed(ulong id)
+        {
+            //ToDo: KB-006 Need to add incoming voice processing.
         }
     }
 }
