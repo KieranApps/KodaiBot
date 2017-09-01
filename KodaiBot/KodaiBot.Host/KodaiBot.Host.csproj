@@ -168,12 +168,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AudioOutputController.cs" />
-    <Compile Include="Controllers\AudioInputController.cs" />
-    <Compile Include="Controllers\InfoController.cs" />
-    <Compile Include="Controllers\MathController.cs" />
-    <Compile Include="Controllers\_BaseController.cs" />
+    <Compile Include="Controllers\AdminModule.cs" />
+    <Compile Include="Controllers\AudioModule.cs" />
+    <Compile Include="Controllers\InfoModule.cs" />
+    <Compile Include="Controllers\MathModule.cs" />
+    <Compile Include="Controllers\_ModuleBase.cs" />
     <Compile Include="_DiscordProxy.cs" />
     <Compile Include="_Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

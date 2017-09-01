@@ -6,20 +6,20 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Discord;
 using Discord.Audio;
 using KodaiBot.Common.ConfigurationModel;
+using KodaiBot.RepositoryLayer.Interfaces;
 
 namespace KodaiBot.BusinessLayer.Helpers
 {
-    public class AudioHelper
+    public class AudioHelper : HelperBase
     {
-        private readonly Logger _logger;
         private readonly ConcurrentDictionary<ulong, IAudioClient> _connectedChannels;
 
-        public AudioHelper(Logger logger)
+        public AudioHelper(Logger logger, IMapper mapper, IUnitOfWork unitOfWork) : base(logger, mapper, unitOfWork)
         {
-            _logger = logger;
             _connectedChannels = new ConcurrentDictionary<ulong, IAudioClient>();
         }
 
@@ -36,7 +36,7 @@ namespace KodaiBot.BusinessLayer.Helpers
 
             if (_connectedChannels.TryAdd(guild.Id, audioClient))
             {
-                await _logger.Log($"Connected to voice on {guild.Name}.", GetType().Name);
+                await Logger.Log($"Connected to voice on {guild.Name}.", GetType().Name);
             }
         }
 
@@ -45,7 +45,7 @@ namespace KodaiBot.BusinessLayer.Helpers
             if (!_connectedChannels.TryRemove(guild.Id, out IAudioClient client)) return;
 
             await client.StopAsync();
-            await _logger.Log($"Disconnected from voice on {guild.Name}.", GetType().Name);
+            await Logger.Log($"Disconnected from voice on {guild.Name}.", GetType().Name);
         }
 
         public async Task SendAsync(IGuild guild, string path, IVoiceChannel channel = null)
@@ -54,10 +54,10 @@ namespace KodaiBot.BusinessLayer.Helpers
 
             if (!_connectedChannels.TryGetValue(guild.Id, out IAudioClient client)) return;
             
-            await _logger.Log($"Starting playback of {path} in {guild.Name}", GetType().Name);
+            await Logger.Log($"Starting playback of {path} in {guild.Name}", GetType().Name);
 
             var output = CreateStream(path).StandardOutput.BaseStream;
-            var stream = client.CreatePCMStream(AudioApplication.Music);
+            var stream = client.CreatePCMStream(AudioApplication.Mixed);
 
             await output.CopyToAsync(stream);
             await stream.FlushAsync().ConfigureAwait(false);

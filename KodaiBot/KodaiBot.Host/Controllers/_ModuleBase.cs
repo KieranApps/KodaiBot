@@ -8,12 +8,12 @@ using KodaiBot.Common.ConfigurationModel;
 
 namespace KodaiBot.Host.Controllers
 {
-    public class BaseController : ModuleBase
+    public class ModuleBase : Discord.Commands.ModuleBase
     {
         internal readonly IServiceProvider ServiceProvider;
         internal readonly Logger Logger;
 
-        public BaseController(IServiceProvider serviceProvider, Logger logger)
+        public ModuleBase(IServiceProvider serviceProvider, Logger logger)
         {
             ServiceProvider = serviceProvider;
             Logger = logger;

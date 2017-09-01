@@ -1,22 +1,51 @@
 ﻿using System;
-using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Discord;
-using Discord.Audio;
 using Discord.Commands;
 using KodaiBot.BusinessLayer.Commands;
 using KodaiBot.Common.ConfigurationModel;
 
 namespace KodaiBot.Host.Controllers
 {
-    public class AudioOutputController : BaseController
+    public class AudioModule : ModuleBase
     {
-        public AudioOutputController(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
+        public AudioModule(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
         {
         }
 
+        [Command("connect", RunMode = RunMode.Async),
+            Alias("listen", "summon", "join", "."),
+            Summary("Joins your channel or the channel you specify")]
+        public async Task Connect(
+            [Summary("The channel you would like the bot to enter")]IVoiceChannel channel = null)
+        {
+            var command = GetCommand<SummonAudioClientCommand>();
+
+            command.Guild = Context.Guild;
+            command.Channel = channel;
+            command.User = Context.User;
+            command.Execute();
+
+            await command.Result;
+        }
+
+        [Command("disconnect", RunMode = RunMode.Async),
+            Alias("leave", "quit", "bye", "q", "dc"),
+            Summary("Leaves the server")]
+        public async Task Disconnect()
+        {
+            var command = GetCommand<DisconnectAudioCientCommand>();
+
+            command.Guild = Context.Guild;
+            command.Execute();
+
+            await command.Result;
+        }
+
+
         [Group("play")]
-        public class PlayController : BaseController
+        public class PlayController : ModuleBase
         {
             public PlayController(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
             {
@@ -34,14 +63,14 @@ namespace KodaiBot.Host.Controllers
                 [Summary("Relative path to the file on the server")] string path,
                 [Summary("The channel you would like the bot to enter")]IVoiceChannel channel = null)
             {
-               
+
             }
 
             [Command("youtube", RunMode = RunMode.Async)]
             public async Task PlayYoutube(
                 [Summary("Url to the youtube video")] string url)
             {
-                
+
             }
 
         }

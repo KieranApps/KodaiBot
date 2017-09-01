@@ -6,9 +6,9 @@ using KodaiBot.Common.ConfigurationModel;
 
 namespace KodaiBot.Host.Controllers
 {
-    public class MathController : BaseController
+    public class MathModule : ModuleBase
     {
-        public MathController(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
+        public MathModule(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
         {
         }
 

@@ -6,9 +6,9 @@ using KodaiBot.Common.ConfigurationModel;
 
 namespace KodaiBot.Host.Controllers
 {
-    public class InfoController : BaseController
+    public class InfoModule : ModuleBase
     {
-        public InfoController(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
+        public InfoModule(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
         {
         }
 

@@ -16,5 +16,6 @@ namespace KodaiBot.BusinessLayer.Helpers
             Mapper = mapper;
             UnitOfWork = unitOfWork;
         }
+
     }
 }

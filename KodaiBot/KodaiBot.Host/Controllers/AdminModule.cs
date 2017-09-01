@@ -4,14 +4,14 @@ using KodaiBot.Common.ConfigurationModel;
 
 namespace KodaiBot.Host.Controllers
 {
-    public class AdminController : BaseController
+    public class AdminModule : ModuleBase
     {
-        public AdminController(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
+        public AdminModule(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
         {
         }
 
         [Group("clean")]
-        public class CleanController : BaseController
+        public class CleanController : ModuleBase
         {
             public CleanController(IServiceProvider serviceProvider, Logger logger) : base(serviceProvider, logger)
             {
