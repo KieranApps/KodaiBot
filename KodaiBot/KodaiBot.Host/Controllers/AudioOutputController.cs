@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Discord;
 using Discord.Audio;
 using Discord.Commands;
 using KodaiBot.BusinessLayer.Commands;
@@ -30,36 +31,19 @@ namespace KodaiBot.Host.Controllers
 
             [Command("mp3", RunMode = RunMode.Async)]
             public async Task PlayRelativePath(
-                [Summary("Relative path to the file on the server")] string path)
+                [Summary("Relative path to the file on the server")] string path,
+                [Summary("The channel you would like the bot to enter")]IVoiceChannel channel = null)
             {
-                using (var client = await GetAudioClient())
-                {
-                    var stream = GetOutputAudioStream();
-                    var outgoingStream = client.CreatePCMStream(AudioApplication.Mixed);
-
-                    await stream.CopyToAsync(outgoingStream);
-                    await outgoingStream.FlushAsync();
-                }
+               
             }
 
             [Command("youtube", RunMode = RunMode.Async)]
             public async Task PlayYoutube(
                 [Summary("Url to the youtube video")] string url)
             {
-                using (var client = await GetAudioClient())
-                {
-                    await Task.Delay(5000);
-                }
+                
             }
 
-            private Stream GetOutputAudioStream()
-            {
-                var command = GetCommand<GetAudioStreamCommand>();
-
-                command.Execute();
-
-                return command.Result;
-            }
         }
     }
 }

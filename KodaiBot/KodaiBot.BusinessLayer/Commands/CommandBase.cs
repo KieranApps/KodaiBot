@@ -26,15 +26,15 @@ namespace KodaiBot.BusinessLayer.Commands
                 UnitOfWork.BeginTransaction();
                 CanExecute();
 
-                Logger.Log($"Command { this.GetType().Name } is ready to be Executed", this.GetType().Name);
+                Logger.Log($"Command { GetType().Name } is ready to be Executed", GetType().Name);
 
                 OnExecute();
                 UnitOfWork.Commit();
-                Logger.Log($"Command { this.GetType().Name } has succesfully been executed", this.GetType().Name);
+                Logger.Log($"Command { GetType().Name } has succesfully been executed", GetType().Name);
             }
             catch (Exception exception)
             {
-                Logger.Log(exception.Message, this.GetType().Name, LogSeverity.Critical, exception);
+                Logger.Log(exception.Message, GetType().Name, LogSeverity.Critical, exception);
                 UnitOfWork.RollBack();
                 throw;
             }
@@ -52,7 +52,7 @@ namespace KodaiBot.BusinessLayer.Commands
         {
             if (prerequisite)
             {
-                Logger.Log($"Prerequisite condition from { this.GetType().Name } command has succesfully been met", this.GetType().Name);
+                Logger.Log($"Prerequisite condition from { GetType().Name } command has succesfully been met", GetType().Name);
             }
             else
             {
