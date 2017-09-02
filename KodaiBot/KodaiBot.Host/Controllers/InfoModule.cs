@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Discord.Commands;
 using KodaiBot.BusinessLayer.Commands;
 using KodaiBot.Common.ConfigurationModel;
+using Discord;
 
 namespace KodaiBot.Host.Controllers
 {
@@ -12,7 +13,7 @@ namespace KodaiBot.Host.Controllers
         {
         }
 
-        [Command("time"), 
+        [Command("time"),
             Alias("now", "timezone", "date", "datetime"),
             Summary("Returns the time in a current timezone")]
         public async Task GetCurrentTime(
@@ -26,5 +27,19 @@ namespace KodaiBot.Host.Controllers
 
             await ReplyAsync(command.Result);
         }
+
+        [Command("ping"),
+            Alias("connection"),
+            Summary("Returns the ping of the connection to the server in ms")]
+        public async Task GetPing()
+        {
+            var command = GetCommand<GetPingCommand>();
+
+            command.Execute();
+
+            await ReplyAsync(command.Result);
+        }
+            
+
     }
 }

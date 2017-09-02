@@ -168,6 +168,7 @@
     <Compile Include="Commands\Audio\DisconnectAudioCientCommand.cs" />
     <Compile Include="Commands\Audio\SummonAudioClientCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\Info\GetPingCommand.cs" />
     <Compile Include="Commands\Math\GetCalculationResultCommand.cs" />
     <Compile Include="Commands\Math\GetDicerollCommand.cs" />
     <Compile Include="Commands\Info\GetCurrentTimeCommand.cs" />
